@@ -1,0 +1,9 @@
+.custom-navbar-bg {
+    background: linear-gradient(to right, #5c6bc0, #512da8);
+}
+
+.sign{
+    background-color: transparent;
+    border-color: #fff; 
+    color: #fff;    
+}
