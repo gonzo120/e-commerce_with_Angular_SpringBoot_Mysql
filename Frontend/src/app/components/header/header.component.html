@@ -1,7 +1,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark custom-navbar-bg">
     <img src="assets/img/Logo.JPG" alt="Logo" style="height: 60px; margin-right: 10px; border-radius: 50%;" />
-    <a class="navbar-brand" href="#">E-commerce by NGC</a>
+    <a class="navbar-brand" href="/">E-commerce by NGC</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,7 +9,9 @@
     <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/"
+          *ngIf="isLoggedIn()"
+          >Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/admin"
@@ -21,10 +23,20 @@
           *ngIf="userService.roleMatch(['User'])"
           >User Dashboard</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/addNewProduct"
+          *ngIf="isAdmin()"
+          >Add New Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/showProductDetails"
+          *ngIf="isAdmin()"
+          >Show Product Details</a>
+        </li>
         
       </ul>
       
-        <button *ngIf="! isLoggedIn()" type="button" class="btn sign" routerLink="/login">Login</button>
+        <button *ngIf="!isLoggedIn()" type="button" class="btn sign" routerLink="/login">Login</button>
         <button type="button" class="btn sign" 
         *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
       

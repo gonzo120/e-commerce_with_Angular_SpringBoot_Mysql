@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+ 
+
+.parent{
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 90vh;
+    
+}
+
+.container{
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 1000px;
+    max-width: 100%;
+    min-height: 510px;
+    display: flex
+    
+}
+
+
+
+.container form{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 100px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.container input{
+    background-color: #eee;
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+.productForm, .image {
+    opacity: 1;
+    z-index: 5;
+}
+
+.form-container{
+    
+    top: 0;
+    height: 100%;
+    
+}
+
+.mat-grid-tile{
+    border: 1px solid #2b2b2b;
+    width: 100px;
+    height: 100ox;
+}
+
+
+.mat-icon {
+    font-family: 'Material Icons';
+  }
+  
+  .table-container {
+    max-height: 500px; /* Ajusta esta altura según tus necesidades */
+    overflow-y: auto;
+  }
+  

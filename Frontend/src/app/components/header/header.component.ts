@@ -22,10 +22,25 @@ export class HeaderComponent {
 
   public isLoggedIn() {
     return this.userAuthService.isLoggedIn();
+    
   }
 
   public logout() {
     this.userAuthService.clear();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
+  }
+
+  public isAdmin() {
+    if (this.isLoggedIn()) { 
+      return this.userAuthService.isAdmin();
+    }
+    return false; 
+  }
+
+  public isUser() {
+    if (this.isLoggedIn()) { 
+      return this.userAuthService.isUser();
+    }
+    return false; 
   }
 }

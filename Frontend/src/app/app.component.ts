@@ -6,12 +6,13 @@ import { SearchComponent } from './components/search/search.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HeaderComponent } from './components/header/header.component';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,RouterOutlet, 
     SearchComponent, FormsModule, ReactiveFormsModule,
-  SummaryComponent, MatDialogModule, HeaderComponent],
+  SummaryComponent, MatDialogModule, HeaderComponent, MatIconModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
