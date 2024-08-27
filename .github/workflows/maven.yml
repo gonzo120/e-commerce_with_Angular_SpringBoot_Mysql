@@ -42,7 +42,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'  # Actualiza a Node.js 20
 
       - name: Install Dependencies
         working-directory: ./Frontend
@@ -64,14 +64,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy Backend
+      - name: Simulate Deploy Backend
         working-directory: ./jwt
         run: |
-          # Aquí puedes ejecutar comandos de despliegue para tu backend
-          echo "Desplegando el backend..."
+          echo "Simulando el despliegue del backend..."
 
-      - name: Deploy Frontend
+      - name: Simulate Deploy Frontend
         working-directory: ./Frontend
         run: |
-          # Aquí puedes ejecutar comandos de despliegue para tu frontend
-          echo "Desplegando el frontend..."
+          echo "Simulando el despliegue del frontend..."
