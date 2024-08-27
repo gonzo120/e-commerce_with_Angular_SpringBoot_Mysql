@@ -24,7 +24,7 @@ jobs:
           cache: maven
 
       - name: Build Backend
-        working-directory: ./backend
+        working-directory: ./jwt
         run: mvn clean install
 
       - name: Test Backend
