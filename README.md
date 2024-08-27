@@ -8,7 +8,7 @@ Este proyecto es una aplicación full stack que utiliza Angular para el frontend
 
 ## Login
 
-![Login](AplicacionEcommerce.png)
+![Login](AplicacionEcommerce2.png)
 
 ## Requisitos
 
