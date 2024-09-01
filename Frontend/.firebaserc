@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "e-commerce-by-ngc",
+    "ecommerce": "ecommerce-byngc"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

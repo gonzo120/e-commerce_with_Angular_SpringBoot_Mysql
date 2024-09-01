@@ -8,7 +8,9 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root'
 })
 export class ClienteService {
-  private baseUrl = 'http://localhost:9090/';
+  private baseUrl = 'https://e-commerce-with-angular-springboot-mysql.onrender.com/';
+  //private baseUrl = 'http://localhost:9090/';
+
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   headers = new HttpHeaders({
     'Authorization': 'Bearer ', // Reemplaza con tu token de autenticación

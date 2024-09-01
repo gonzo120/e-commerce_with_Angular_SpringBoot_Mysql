@@ -36,6 +36,12 @@ export class ProductViewDetailsComponent implements OnInit {
     console.log(this.product)
   }
 
+  buyProduct(productId:number) {
+    this.router.navigate(['/buyProduct', {
+      isSingleProductCheckout: true, id: productId
+    }]);
+  }
+
   /* addToCart(productId:any) {
     this.productService.addToCart(productId).subscribe(
       (response) => {
@@ -50,9 +56,5 @@ export class ProductViewDetailsComponent implements OnInit {
     this.selectedProductIndex = index;
   }
 
-  buyProduct(productId) {
-    this.router.navigate(['/buyProduct', {
-      isSingleProductCheckout: true, id: productId
-    }]);
-  } */
+   */
 }
