@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.project.jwt.JwtApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 115.4 s -- in com.project.jwt.JwtApplicationTests

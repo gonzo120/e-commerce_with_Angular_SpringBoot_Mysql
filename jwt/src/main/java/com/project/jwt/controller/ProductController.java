@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.http.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.jwt.entity.ImageModel;
 import com.project.jwt.entity.Product;
 import com.project.jwt.service.ProductService;
+import com.project.jwt.service.UserService;
+
+import jakarta.annotation.PostConstruct;
+
 import java.util.HashSet;
 import java.io.IOException;
 import java.util.List;
@@ -30,6 +35,15 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+   
+    @Autowired
+    private UserService userService;
+
+    @PostConstruct
+    public void initRoleAndUser() {
+        userService.initRoleAndUser();
+    }
 
    /*  
     @PostMapping(value = {"/addNewProduct"})
@@ -86,5 +100,12 @@ public class ProductController {
     @GetMapping({"/getProductDetailsById/{productId}"})
     public Product getProductDetailsById(@PathVariable("productId") Integer productId) {
         return productService.getProductDetailsById(productId);
+    }
+
+    @PreAuthorize("hasRole('User')")
+    @GetMapping({"/getProductDetails/{isSingleProductCheckout}/{productId}"})
+    public List<Product> getProductDetails(@PathVariable("isSingleProductCheckout") boolean isSingleProductCheckout,  
+                                  @PathVariable("productId") Integer productId) {
+        return productService.getProductDetails(isSingleProductCheckout, productId);
     }
 }
