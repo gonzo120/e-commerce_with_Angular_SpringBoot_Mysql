@@ -36,7 +36,8 @@ jobs:
               - name: Deploy to Firebase
                 uses: w9jds/firebase-action@master
                 with:
-                  args: deploy --only hosting --config Frontend/firebase.json
+                  args: deploy --only hosting --project ecommerce --config Frontend/firebase.json
                 env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+              
           
