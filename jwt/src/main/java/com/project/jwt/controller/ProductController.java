@@ -86,10 +86,10 @@ public class ProductController {
    /*  @GetMapping({"/getAllProducts"})
     public List<Product> getAllProducts(@RequestParam(defaultValue = "0") int pageNumber,
                                         @RequestParam(defaultValue = "") String searchKey) { */
-        @GetMapping({"/getAllProducts"})
+     /*    @GetMapping({"/getAllProducts"})
         public List<Product> getAllProducts(){            
         return productService.getAllProducts(); 
-         }
+         } */
 
     @DeleteMapping({"/deleteProductDetails/{productId}"})
     public void deleteProductDetails(@PathVariable("productId") Integer productId) {
@@ -107,5 +107,13 @@ public class ProductController {
     public List<Product> getProductDetails(@PathVariable("isSingleProductCheckout") boolean isSingleProductCheckout,  
                                   @PathVariable("productId") Integer productId) {
         return productService.getProductDetails(isSingleProductCheckout, productId);
+    }
+
+    @GetMapping({"/getAllProducts"})
+    public List<Product> getAllProducts(
+                                        @RequestParam(defaultValue = "") String searchKey) {
+        List<Product> result = productService.getAllProducts( searchKey);
+        System.out.println("Result size is "+ result.size());
+        return result;
     }
 }

@@ -51,7 +51,7 @@ export class BuyProductComponent implements OnInit {
   public showSuccessAlert() {
     Swal.fire({
       title: 'Success',
-      text: 'User created successfully.',
+      text: 'Your order is place successfully. It will get delivered to you within 4-5 business days.',
       icon: 'success',
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Ok'
@@ -64,7 +64,7 @@ export class BuyProductComponent implements OnInit {
   placeOrder(form: NgForm){
     
     console.log(this.orderDetails)
-    this.productService.placeOrder(this.orderDetails).subscribe(
+    this.productService.placeOrder(this.orderDetails, this.isSingleProductCheckout).subscribe(
       (resp) => {
         console.log(resp);
         form.reset();
@@ -140,7 +140,7 @@ export class BuyProductComponent implements OnInit {
 
   openTransactioModal(response: any, orderForm: NgForm) {
     var options = {
-      order_id: response.orderId,
+      order_id: response.orderId, 
       key: response.key,
       amount: response.amount,
       currency: response.currency,

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../_model/product.model';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-product-view-details',
@@ -21,7 +22,8 @@ export class ProductViewDetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
-    private productService: ProductService) { 
+    private productService: ProductService,
+  private userAuthService: UserAuthService) { 
       this.product = {
       productId: 0,
       productName: '',
@@ -42,7 +44,7 @@ export class ProductViewDetailsComponent implements OnInit {
     }]);
   }
 
-  /* addToCart(productId:any) {
+   addToCart(productId:any) {
     this.productService.addToCart(productId).subscribe(
       (response) => {
         console.log(response);
@@ -52,9 +54,21 @@ export class ProductViewDetailsComponent implements OnInit {
     );
   }
 
-  changeIndex(index) {
+  changeIndex(index:any) {
     this.selectedProductIndex = index;
   }
 
-   */
+  public isLoggedIn() {
+    return this.userAuthService.isLoggedIn();
+    
+  }
+
+
+  public isAdmin() {
+    if (this.isLoggedIn()) { 
+      return this.userAuthService.isAdmin();
+    }
+    return false;
+  }
+   
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProductService } from './services/product.service';
 import { ImageProcessingService } from './image-processing.service';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from './_model/product.model';
 
@@ -28,5 +28,12 @@ export class BuyProductResolverService implements Resolve<Product[]>{
           (x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product))
         )
       );
+  }
+
+  private searchKeywordSubject = new BehaviorSubject<string>('');
+  searchKeyword$ = this.searchKeywordSubject.asObservable();
+
+  updateSearchKeyword(keyword: string) {
+    this.searchKeywordSubject.next(keyword);
   }
 }

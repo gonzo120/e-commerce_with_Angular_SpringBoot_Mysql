@@ -33,12 +33,25 @@
           *ngIf="isAdmin()"
           >Show Product Details</a>
         </li>
+        <li class="nav-item"  >
+          <a class="nav-link active" aria-current="page" routerLink="/cart"
+          *ngIf="isLoggedIn() && !isAdmin()"
+          >Cart</a>
+        </li>
         
       </ul>
       
+      <div class="d-flex align-items-center ml-auto">
+        <form *ngIf="currentRoute === '/' || currentRoute === '/showProductDetails'" 
+        class="form-inline my-2 my-lg-0 mx-2">
+          <input #searchkeyword 
+          (keyup)="searchByKeyword2(searchkeyword.value)"
+          type="text" name="search" placeholder="Search" 
+          id="searchKey" class="form-control mr-sm-2" required>
+        </form>
         <button *ngIf="!isLoggedIn()" type="button" class="btn sign" routerLink="/login">Login</button>
-        <button type="button" class="btn sign" 
-        *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+        <button type="button" class="btn sign" *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+      </div>
       
     </div>
   </nav>

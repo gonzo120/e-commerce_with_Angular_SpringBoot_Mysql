@@ -7,12 +7,16 @@ import { Router } from '@angular/router';
 import { Product } from '../../_model/product.model';
 import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormsModule, NgForm } from '@angular/forms';
+import { BuyProductResolverService } from '../../buy-product-resolver.service';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule,
-    MatGridListModule],
+    MatGridListModule,
+    FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -26,32 +30,33 @@ export class HomeComponent implements OnInit{
 
   constructor(private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
-    private router: Router) { }
+    private router: Router,
+    private searchservice: BuyProductResolverService,) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    //this.getAllProducts();
+    this.searchservice.searchKeyword$.subscribe(keyword => {
+      this.searchByKeyword(keyword);
+    });
   }
 
-  /* searchByKeyword(searchkeyword) {
+   searchByKeyword(searchkeyword:any) {
     console.log(searchkeyword);
     this.pageNumber = 0;
-    this.productDetails = [];
+    
     this.getAllProducts(searchkeyword);
-  } */
+  } 
 
   public getAllProducts(searchKey: string = "") {
-    this.productService.getAllProducts()
+    
+    this.productService.getAllProducts(searchKey)
     .pipe(
       map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
     )
     .subscribe(
       (resp: Product[]) => {
         console.log(resp);
-        if(resp.length == 12) {
-          this.showLoadButton = true;
-        } else {
-          this.showLoadButton = false;
-        }
+        this.productDetails = [];
         resp.forEach(p => this.productDetails.push(p));
         
         console.log(this.productDetails)

@@ -8,9 +8,9 @@ import java.util.List;
 
 @Repository
 public interface ProductDao extends JpaRepository<Product, Integer> {
-    /* public List<Product> findAll(Pageable pageable);
+    public List<Product> findAll();
 
     public List<Product> findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(
-            String key1, String key2, Pageable pageable
-    ); */
+            String key1, String key2
+    ); 
 }

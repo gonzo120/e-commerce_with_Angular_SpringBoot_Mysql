@@ -31,9 +31,9 @@ export class ProductService {
     return this.http.post<Product>(this.baseUrl + 'addNewProduct', product);
   }
 
-  public getAllProducts() {
+  /* public getAllProducts() {
     return this.http.get<Product[]>(this.baseUrl+'getAllProducts');
-  }
+  } */
   public deleteProduct(productId: number) {
     return this.http.delete(this.baseUrl+ 'deleteProductDetails/'+productId);
   }
@@ -49,8 +49,29 @@ export class ProductService {
     );
   }
 
-  public placeOrder(orderDetails: OrderDetails) {
-    return this.http.post(this.baseUrl+ 'placeOrder', orderDetails
+  public placeOrder(orderDetails: OrderDetails, isCartCheckout:any) {
+    return this.http.post(this.baseUrl+ 'placeOrder/'+  isCartCheckout, orderDetails
+      , { headers: this.getHeaders() }
+    );
+  }
+
+  public getAllProducts(searchKey: string = "") {
+    return this.http.get<Product[]>(this.baseUrl+ 'getAllProducts?searchKey='+searchKey);
+  }
+
+  public getCartDetails() {
+    return this.http.get(this.baseUrl+ 'getCartDetails', 
+      { headers: this.getHeaders() });
+  }
+
+  public deleteCartItem(cartId:any) {
+    return this.http.delete(this.baseUrl+'deleteCartItem/'+cartId
+      , { headers: this.getHeaders() }
+    );
+  }
+
+  public addToCart(productId:any) {
+    return this.http.get(this.baseUrl+'addToCart/'+productId
       , { headers: this.getHeaders() }
     );
   }

@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ShowProductImagesDialogComponent } from '../show-product-images-dialog/show-product-images-dialog.component';
 import { ImageProcessingService } from '../../image-processing.service';
 import { MatButtonModule } from "@angular/material/button";
+import { BuyProductResolverService } from '../../buy-product-resolver.service';
 
 
 @Component({
@@ -35,10 +36,13 @@ export class ShowProductDetailsComponent implements OnInit {
   constructor(private productService: ProductService,
     public imagesDialog: MatDialog,
     private imageProcessingService: ImageProcessingService,
-    private router: Router) { }
+    private router: Router,
+    private searchservice: BuyProductResolverService,) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.searchservice.searchKeyword$.subscribe(keyword => {
+      this.searchByKeyword(keyword);
+    });
   }
 
   /* searchByKeyword(searchkeyword) {
@@ -73,29 +77,32 @@ export class ShowProductDetailsComponent implements OnInit {
       }
     );
   } */
-
-    public getAllProducts(){
-      this.productService.getAllProducts()
-      .pipe(
-        map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product))) 
-      ).subscribe(
-        (resp: Product[]) => {
-          //console.log(resp);
-          this.productDetails = resp;
-          /* resp.forEach(product => this.productDetails.push(product));
-          console.log('msg', this.productDetails);
-          this.showTable = true;
+    searchByKeyword(searchkeyword:any) {
+      console.log(searchkeyword);
+      this.pageNumber = 0;
+      
+      this.getAllProducts(searchkeyword);
+    } 
   
-          if(resp.length == 12) {
-            this.showLoadMoreProductButton = true;
-          } else {
-            this.showLoadMoreProductButton = false;
-          } */
+    public getAllProducts(searchKey: string = "") {
+      
+      this.productService.getAllProducts(searchKey)
+      .pipe(
+        map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
+      )
+      .subscribe(
+        (resp: Product[]) => {
+          console.log(resp);
+          this.productDetails = [];
+          resp.forEach(p => this.productDetails.push(p));
+          this.showTable = true;
+          console.log(this.productDetails)
         }, (error: HttpErrorResponse) => {
-            console.log(error);
-          }
-        );
+          console.log(error);
+        }
+      );
     }
+    
 
   loadMoreProduct() {
     this.pageNumber = this.pageNumber + 1;

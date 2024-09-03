@@ -1,7 +1,9 @@
 com\project\jwt\entity\JwtRequest.class
 com\project\jwt\service\ProductService.class
 com\project\jwt\entity\Product.class
+com\project\jwt\dao\CartDao.class
 com\project\jwt\configuration\JwtAuthenticationEntryPoint.class
+com\project\jwt\controller\CartController.class
 com\project\jwt\entity\ImageModel.class
 com\project\jwt\service\OrderDetailService.class
 com\project\jwt\controller\JwtController.class
@@ -19,6 +21,7 @@ com\project\jwt\dao\ProductDao.class
 com\project\jwt\entity\JwtResponse.class
 com\project\jwt\dao\RoleDao.class
 com\project\jwt\util\JwtUtil.class
+com\project\jwt\entity\Cart.class
 com\project\jwt\entity\OrderProductQuantity.class
 com\project\jwt\service\JwtService.class
 com\project\jwt\controller\RoleController.class
@@ -27,4 +30,5 @@ com\project\jwt\dao\OrderDetailDao.class
 com\project\jwt\entity\OrderInput.class
 com\project\jwt\configuration\CorsConfiguration$1.class
 com\project\jwt\configuration\CorsConfiguration.class
+com\project\jwt\service\CartService.class
 com\project\jwt\service\UserService.class

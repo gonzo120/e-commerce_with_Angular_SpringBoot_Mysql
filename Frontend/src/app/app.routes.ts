@@ -14,6 +14,7 @@ import { ProductViewDetailsComponent } from './components/product-view-details/p
 import { BuyProductComponent } from './components/buy-product/buy-product.component';
 import { BuyProductResolverService } from './buy-product-resolver.service';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export const routes: Routes = [
 
@@ -44,6 +45,8 @@ export const routes: Routes = [
         resolve: {
             productDetails: BuyProductResolverService
         },
+    },{
+        path: 'cart', component: CartComponent, canActivate: [AuthGuard], data: { roles: ['User'] }
     }
 ];
 

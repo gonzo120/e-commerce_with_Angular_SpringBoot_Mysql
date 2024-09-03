@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.jwt.configuration.JwtRequestFilter;
+import com.project.jwt.dao.CartDao;
 import com.project.jwt.dao.OrderDetailDao;
 import com.project.jwt.dao.ProductDao;
 import com.project.jwt.dao.UserDao;
+import com.project.jwt.entity.Cart;
 import com.project.jwt.entity.OrderDetail;
 import com.project.jwt.entity.OrderInput;
 import com.project.jwt.entity.OrderProductQuantity;
@@ -31,7 +33,10 @@ public class OrderDetailService {
     @Autowired
     private UserDao userDao;
 
-    public void placeOrder(OrderInput orderInput){
+    @Autowired
+    private CartDao cartDao;
+
+    public void placeOrder(OrderInput orderInput, boolean isSingleProductCheckout){
             
         List<OrderProductQuantity> productQuantityList = orderInput.getOrderProductQuantityList();
 
@@ -54,12 +59,19 @@ public class OrderDetailService {
             );
 
             // empty the cart.
-            /* if(!isSingleProductCheckout) {
+            if(!isSingleProductCheckout) {
                 List<Cart> carts = cartDao.findByUser(user);
                 carts.stream().forEach(x -> cartDao.deleteById(x.getCartId()));
-            } */
+            } 
 
             orderDetailDao.save(orderDetail);
         }
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        String currentUser = JwtRequestFilter.CURRENT_USER;
+        User user = userDao.findById(currentUser).get();
+
+        return orderDetailDao.findByUser(user);
     }
 }
