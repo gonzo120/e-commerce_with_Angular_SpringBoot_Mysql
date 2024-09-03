@@ -1,0 +1,42 @@
+name: Automatic Hosting
+on:
+  push:
+    branches:
+      - Nelson
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd Frontend
+          npm install
+
+      - name: Build Frontend
+        run: |
+          cd Frontend
+          npm run build-prod
+
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: Frontend/dist
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
