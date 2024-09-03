@@ -21,23 +21,34 @@ jobs:
           cd Frontend
           npm run build
 
+      - name: List build directory
+        run: |
+          ls -la Frontend/dist/cliente-app/browser
+
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
           name: dist
           path: Frontend/dist
+
   deploy:
-            name: Deploy
-            runs-on: ubuntu-latest
-            steps:
-              - name: Checkout Repo
-                uses: actions/checkout@master
-        
-              - name: Deploy to Firebase
-                uses: w9jds/firebase-action@master
-                with:
-                  args: deploy --only hosting --project ecommerce --config Frontend/firebase.json
-                env:
-                  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Set Firebase Project
+        run: |
+          cd Frontend
+          firebase use ecommerce
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting --config Frontend/firebase.json
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
               
           
