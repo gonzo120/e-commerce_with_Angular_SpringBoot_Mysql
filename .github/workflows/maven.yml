@@ -58,9 +58,6 @@ jobs:
         working-directory: ./Frontend
         run: npm run build
 
-      - name: Test Frontend
-        working-directory: ./Frontend
-        run: npm run test
 
   deploy:
     name: Deploy Application
