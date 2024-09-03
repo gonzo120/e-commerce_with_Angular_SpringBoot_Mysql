@@ -38,6 +38,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
 
+      - name: Install Firebase CLI
+        run: |
+          npm install -g firebase-tools
+
       - name: Set Firebase Project
         run: |
           cd Frontend
@@ -50,5 +54,4 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-              
           
